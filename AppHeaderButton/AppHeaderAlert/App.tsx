@@ -15,7 +15,7 @@ type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 //Componente para a tela inicial 
-function HomeScreen({ navigation}: HomeScreenProps): React.JSX.Element {
+function HomeScreen({ navigation }: HomeScreenProps): React.JSX.Element {
     return (
         <View style={styles.container}>
             <Text style={styles.mainText}>Exemplo Header Button</Text>
@@ -40,7 +40,7 @@ function HomeScreen({ navigation}: HomeScreenProps): React.JSX.Element {
  //Componente principal do aplicativo 
  function App(): React.JSX.Element {
     const handleButtonPress = (): void => {
-        Alert.alert('Informação', 'voce pressionou o botão');
+        Alert.alert('Informação', 'Você pressionou o botão!');
     };
 
     return (
