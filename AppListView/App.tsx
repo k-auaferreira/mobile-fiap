@@ -1,38 +1,40 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, SafeAreaView, Image } from 'react-native';
 
 // Interface para definir o tipo dos dados
 interface ListItem {
   id: number;
   name: string;
+  job: string;
+  image: any; 
 }
 
 export default function App() {
-  // Dados de exemplo para FlatList
+  // Dados de exemplo para FlatList com imagens locais
   const data: ListItem[] = [
-    { id: 1, name: 'Primeiro Item' },
-    { id: 2, name: 'Segundo Item' },
-    { id: 3, name: 'Terceiro Item' },
-    { id: 4, name: 'Quarto Item' },
-    { id: 5, name: 'Quinto Item' },
-    { id: 6, name: 'Sexto Item' },
-    { id: 7, name: 'Sétimo Item' },
-    { id: 8, name: 'Oitavo Item' },
+    { id: 1, name: 'Felipe', job: 'Engenheiro', image: require('./assets/1.jpg') },
+    { id: 2, name: 'Ana', job: 'Psicólogo', image: require('./assets/2.jpg') },
+    { id: 3, name: 'Ricardo', job: 'Médico', image: require('./assets/3.jpg') },
+    { id: 4, name: 'Juliana', job: 'Professor', image: require('./assets/4.jpg') },
+    { id: 5, name: 'Camila', job: 'Designer', image: require('./assets/5.jpg') },
   ];
-
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
-      <Text style={styles.title}>Lista de Itens</Text>
+      <Text style={styles.title}>Contatos</Text>
       <FlatList
         data={data} // Definindo a fonte de dados
         keyExtractor={(item) => item.id.toString()} // Chave única para cada item
         renderItem={({ item }) => (
           <View style={styles.row}>
-            <Text style={styles.rowText}>{item.name}</Text>
+            <Image source={item.image} style={styles.image} />
+            <View style={styles.textContainer}>
+              <Text style={styles.rowTitle}>{item.name}</Text>
+              <Text style={styles.rowJob}>{item.job}</Text>
+            </View>
           </View>
-        )} // Renderização de cada item da FlatList
+        )}
         showsVerticalScrollIndicator={false} // Remove a barra de rolagem
       />
     </SafeAreaView>
@@ -42,7 +44,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0', // Light background color
+    backgroundColor: '#f0f0f0',
   },
   title: {
     fontSize: 24,
@@ -52,17 +54,31 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   row: {
+    flexDirection: 'row',
     padding: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0', // Light border color
+    borderBottomColor: '#e0e0e0',
     backgroundColor: '#fff',
     marginHorizontal: 10,
     marginVertical: 2,
     borderRadius: 8,
+    alignItems: 'center',
   },
-  rowText: {
+  image: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 15,
+  },
+  textContainer: {
+    flexDirection: 'column', // Alinha nome e cargo verticalmente
+  },
+  rowTitle: {
+    fontSize: 20,
+    color: '#333',
+  },
+  rowJob: {
     fontSize: 16,
-    color: '#333', // Dark text color
+    color: '#666',
   },
 });
-
